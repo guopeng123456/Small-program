@@ -5,7 +5,7 @@
   ],
   "window":{
     "backgroundTextStyle":"light",
-    "navigationBarBackgroundColor": "#fff",
+    "navigationBarBackgroundColor": "#CC00FF",
     "navigationBarTitleText": "我的小程序之旅",
     "navigationBarTextStyle":"black"
   }
