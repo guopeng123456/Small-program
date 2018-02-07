@@ -1,54 +1,40 @@
-//index.js
-//获取应用实例
-const app = getApp()
-
-
 Page({
   data: {
-    tempFilePaths: ''
+    imageList: [],
+    countIndex: 8,//最多上传图片的数量
+    count: [1, 2, 3, 4, 5, 6, 7, 8, 9]
   },
-  onLoad: function () {
-  },
-  chooseimage: function () {
-    wx.authorize({
-      scope: 'scope.writePhotosAlbum',
-      success(res) {
-        console.log('保存图片授权成功')
-      },
-      fail() {
-        console.log('保存图片授权失败')
-      }
-    });
-    var that = this;
-    wx.showActionSheet({
-      itemList: ['从相册中选择', '拍照'],
-      itemColor: "#CED63A",
-      success: function (res) {
-        if (!res.cancel) {
-          if (res.tapIndex == 0) {
-            that.chooseWxImage('album')
-          } else if (res.tapIndex == 1) {
-            that.chooseWxImage('camera')
-          }
-        }
-      }
-    })
-
-  },
-
-  chooseWxImage: function (type) {
+  chooseImage: function () {
     var that = this;
     wx.chooseImage({
-      sizeType: ['original', 'compressed'],
-      sourceType: [type],
+      count: this.data.count[this.data.countIndex],
       success: function (res) {
-        console.log(res);
+        console.log(res)
         that.setData({
-          tempFilePaths: res.tempFilePaths[0],
+          imageList: res.tempFilePaths
         })
       }
     })
+  },
+  click:function(){console.log(11)
+    wx.startRecord({
+      success: function (res) {
+        var tempFilePath = res.tempFilePath
+      },
+      fail: function (res) {
+        //录音失败
+      }
+    })
+    setTimeout(function () {
+      //结束录音  
+      wx.stopRecord()
+    }, 10000)
+  },
+  previewImage: function (e) {
+    var current = e.target.dataset.src
+    wx.previewImage({
+      current: current,
+      urls: this.data.imageList
+    })
   }
-
-
-}) 
+})

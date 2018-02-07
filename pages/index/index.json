@@ -1,0 +1,22 @@
+{
+  "a": "a_value",
+  "b": "b_value",
+  "c": [
+    "c1_value",
+    "c2_value"
+  ],
+  "d": {
+    "d1": "d1_value",
+    "d2": "d2_value"
+  },
+  "e": [
+    {
+      "e1": "e1_value",
+      "e2": "e2_value"
+    },
+    {
+      "e3": "e3_value",
+      "e4": "e4_value"
+    }
+  ]
+}
